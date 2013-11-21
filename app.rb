@@ -4,11 +4,7 @@ require './lib/twitter_auth'
 configure do
   set :public_folder, Proc.new {File.join(root, "static")}
   enable :sessions
-  set :sessions, key: 'EjcF6@N8an6w#UFsWMPk',
-    domain: "localhost",
-    path: '/',
-    expire_after: 14400,
-    secret: '$sujB&b6kF6F65yf^D$4'
+  set :sessions, secret: '$sujB&b6kF6F65yf^D$4'
 end
 
 helpers do
