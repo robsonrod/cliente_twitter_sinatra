@@ -1,0 +1,17 @@
+	<% @tweets.each do |tweet| %>
+	
+	<div class="panel panel-info">
+	  <div class="panel-heading">
+		  <div class="stream-item-header">
+	      	<strong class="fullname"><%= tweet[:user][:name] %></strong> @<%= tweet[:user][:screen_name] %>
+  	  	  	<small class="time"><%= tweet[:created_at].strftime("%H:%M:%S") %></small>
+		  </div>		
+	  </div>
+	  <div class="panel-body">
+		  <p><%= tweet[:text] %></p>
+	  </div>
+	</div>	
+		
+	<% end %>
+	
+	
