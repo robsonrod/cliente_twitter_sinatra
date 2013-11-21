@@ -3,7 +3,10 @@
 	<div class="panel panel-info">
 	  <div class="panel-heading">
 		  <div class="stream-item-header">
-	      	<strong class="fullname"><%= tweet[:user][:name] %></strong> @<%= tweet[:user][:screen_name] %>
+	      		<div class="thumbnail">
+      				<img data-src="<%= tweet[:user][:profile_image_url]%>/300x200" alt="">
+      			</div>
+	      		<strong class="fullname"><%= tweet[:user][:name] %></strong> @<%= tweet[:user][:screen_name] %>
   	  	  	<small class="time"><%= tweet[:created_at].strftime("%H:%M:%S") %></small>
 		  </div>		
 	  </div>
