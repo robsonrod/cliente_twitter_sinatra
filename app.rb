@@ -9,24 +9,24 @@ end
 
 helpers do
   
-  def username?
-    if session[:oauth_token].nil? or session[:oauth_token_secret].nil? then
+  def login_valido 
+    if !(session[:consumer_key] && session[:consumer_secret] && session[:oauth_token] && session[:oauth_token_secret]) then
       return false
     end
     return true 
   end
   
-  def oauth_token
-    return session[:oauth_token]
+  def preenchimento_valido (consumer_key, consumer_secret, oauth_token, oauth_token_secret) 
+    if (consumer_key.empty? or consumer_secret.empty? && oauth_token.empty? && oauth_token_secret.empty?) then
+      return false
+    end
+    return true 
   end
-
-  def oauth_token_secret
-    return session[:oauth_token_secret]
-  end
+    
 end
 
 before '/secure/*' do
-  if !(session[:consumer_key] && session[:consumer_secret] && session[:oauth_token] && session[:oauth_token_secret]) then
+  if (!login_valido) then
     session[:previous_url] = request.path
     @error = 'Desculpe, precisa estar logado para acessar ' + request.path
     halt erb(:index)
@@ -47,11 +47,17 @@ get '/secure/sendtweet' do
 end
 
 post '/login' do
-  session[:oauth_token] = params[:token]
-  session[:oauth_token_secret] = params[:token_secret]
-  session[:consumer_key] = params[:consumer_key]
-  session[:consumer_secret] = params[:consumer_secret]
-  redirect '/secure/timeline'  
+  if (preenchimento_valido(params[:token], params[:token_secret], params[:consumer_key],params[:consumer_secret])) then
+    session[:oauth_token] = params[:token]
+    session[:oauth_token_secret] = params[:token_secret]
+    session[:consumer_key] = params[:consumer_key]
+    session[:consumer_secret] = params[:consumer_secret]
+    redirect '/secure/timeline'  
+  end
+  
+  @error = 'Login inválido. Verifique os dados preenchidos.'
+  halt erb(:index)
+  
 end
 
 get '/secure/timeline' do 
@@ -66,9 +72,11 @@ end
 
 
 get '/logout' do
+  @tweets = nil
   session.delete(:consumer_key)
   session.delete(:consumer_secret)
   session.delete(:oauth_token)
   session.delete(:oauth_token_secret)
-  erb "<div class='alert alert-message'>Logged out</div>"
+  erb :logout
+ 
 end

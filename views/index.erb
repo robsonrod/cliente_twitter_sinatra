@@ -1,36 +1,30 @@
-<form action='/login' method='post' class="form-horizontal">
 
-    <div class="control-group">
-      <label class="control-label" for="key">consumer_key</label>
-      <div class="controls">
-        <input id="consumer_key" type="text" name="consumer_key"/>
-      </div>
-    </div>
+<form action='/login' method='post' class="form-signin" role="form">
 
-    <div class="control-group">
-      <label class="control-label" for="consumer_secret">consumer_secret</label>
-      <div class="controls">
-        <input id="consumer_secret" type="text" name="consumer_secret"/>
-      </div>
-    </div>
+	<div class="input-group">
+	  <span class="input-group-addon">consumer_key</span>
+      <input id="consumer_key" type="text" name="consumer_key" class="form-control" placeholder="consumer_key"/>
+	</div>
+	
+	<div class="input-group">
+	  <span class="input-group-addon">consumer_secret</span>
+      <input id="consumer_secret" type="text" name="consumer_secret" class="form-control" placeholder="consumer_secrets"/>
+	</div>
 
-  <div class="control-group">
-    <label class="control-label" for="token">oauth_token</label>
+	<div class="input-group">
+	  <span class="input-group-addon">oauth_token</span>
+      <input id="token" type="text" name="token" class="form-control" placeholder="oauth_token"/>
+	</div>
+
+	<div class="input-group">
+	  <span class="input-group-addon">oauth_token_secret</span>
+      <input id="token_secret" type="text" name="token_secret" class="form-control" placeholder="oauth_token_secret"/>
+	</div>
+	<br>
+  <div class="input-group">
     <div class="controls">
-      <input id="token" type="text" name="token"/>
-    </div>
-  </div>
-  
-  <div class="control-group">
-    <label class="control-label" for="token_secret">oauth_token_secret</label>
-    <div class="controls">
-      <input id="token_secret" name="token_secret" type="text" />
-    </div>
-  </div>
-  
-  <div class="control-group">
-    <div class="controls">
-      <button class="btn" type="submit">Acessar</button>
+      <button class="btn btn-lg btn-primary" type="submit">Acessar</button>
     </div>
   </div>
 </form>
+
